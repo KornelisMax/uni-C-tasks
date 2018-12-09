@@ -35,27 +35,32 @@ int is_letter(int symbol)
 
 
 
-void digits_to_letters(char buffer[], int lenght1)
+void digits_to_letters(char buffer[], int lenght1, char buffer1[])
 {
     char last_char;
     char symbol;
     int i = 0;
     char space = 32;
     int k = 0;
+    
 
    for(i=0; i<= lenght1; i++)
    {
        symbol = buffer[i];
-
+       buffer1[i]= buffer[i];
        if(is_letter(symbol))
        {
+           
        last_char = symbol;
-        for (k=1; k <= lenght1; k++)
+       
+        for (k=0; k <= lenght1; k++)
         {
-            symbol = buffer[k];
+            symbol = buffer1[k];
+            
             if(is_number(symbol))
             {
-                symbol = last_char;
+                buffer1[k] = last_char;
+
             }
         }
        }
@@ -92,12 +97,13 @@ int main(int argc, char *argv[])
 
     while (fgets(r_buffer, LENGHT, ptr_open) != NULL)
     {
-        // int i;
+        int i;
+       
+        digits_to_letters(r_buffer, LENGHT, write_buffer);
         // for (i = 0; i <= LENGHT; i++){
-        //     printf("%c",r_buffer[i]);
+        //     printf("%c",write_buffer[i]);
         // }
-        digits_to_letters(r_buffer, LENGHT);
-        fputs(r_buffer, ptr_write);
+        fputs(write_buffer, ptr_write);
         fprintf(ptr_write, "\n");
     }
     fclose(ptr_open);
