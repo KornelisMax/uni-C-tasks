@@ -4,128 +4,66 @@
 #include <ctype.h>
 #define LENGHT 256
 
-// int is_number(int symbol)
-// {
-//     if (symbol >= '0' && symbol <= '9')
-//     {
-//         return 1;
-//     }
-//     return 0;
-// }
+int is_number(int symbol)
+{
+    if (symbol >= '0' && symbol <= '9')
+    {
+        return 1;
+    }
+    return 0;
+}
 
-// int is_letter(int symbol)
-// {
-//     if ((symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol <= 'Z'))
-//     {
+int is_letter(int symbol)
+{
+    if ((symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol <= 'Z'))
+    {
 
-//         return 1;
-//     }
-
-//     return 0;
-// }
-
-    int letter_symbol(int symbol){
-        if ((isalpha(symbol)) || ((ispunct(symbol))))
-        {
-            return 1;
-        }
-
-        return 0;
+        return 1;
     }
 
+    return 0;
+}
+
+    // int letter_symbol(int symbol){
+    //     if ((isalpha(symbol)) || ((ispunct(symbol))))
+    //     {
+    //         return 1;
+    //     }
+
+    //     return 0;
+    // }
 
 
-void digits_to_letters(char buffer[], int lenght1, char buffer1[])
+
+void digits_to_letters(char buffer[], int lenght1)
 {
     char last_char;
     char symbol;
     int i = 0;
     char space = 32;
     int k = 0;
-    buffer1 = buffer;
-   
-for (i = 0; i <= lenght1; i++){
-            printf("%c",buffer[i]);
-      }
 
-    for (i = 0; i <= lenght1; i++)
-    {
-        for (i = 0; i <= lenght1; i++){
-            printf("%c",buffer[i]);
-      }
-        symbol = buffer[i];
-        
-        if(isalpha(symbol))
+   for(i=0; i<= lenght1; i++)
+   {
+       symbol = buffer[i];
+
+       if(is_letter(symbol))
+       {
+       last_char = symbol;
+        for (k=1; k <= lenght1; k++)
         {
-
-           last_char = buffer[i];     
-
-            printf("%c",buffer1[i]);
-
-           for (k = 0; k <= lenght1; k++)
-           {
-               if(letter_symbol(buffer[k]))
-                {
-                    continue;
-                }
-                if(isdigit(buffer[k]))
-                {
-                    buffer1[k] = last_char;
-                }
-           }
-
+            symbol = buffer[k];
+            if(is_number(symbol))
+            {
+                symbol = last_char;
+            }
         }
-        else if(isspace(buffer[i]))
-        {
-        last_char=NULL;
-        }
-    }
-        
-}   
+       }
 
+   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-//         if (isspace(buffer[i]))
-//         {
-//             last_char = NULL
-//             continue
-//         }
-
-//         if (letter_symbol(buffer[i]))
-//         {
-//             last_char = symbol;
-//             buffer1[i] = last_char;
-//         }
-//         else if (isdigit(buffer[i]))
-//         {
-//             symbol = last_char;
-//             buffer1[i] = symbol;
-//         }
-//     }
-// for (i = 0; i <= lenght1; i++){
-//             printf("%c",buffer1[i]);
-//       }
+}
     
-
-
-// }
 
 
 int main(int argc, char *argv[])
@@ -158,8 +96,8 @@ int main(int argc, char *argv[])
         // for (i = 0; i <= LENGHT; i++){
         //     printf("%c",r_buffer[i]);
         // }
-        digits_to_letters(r_buffer, strlen(r_buffer), write_buffer);
-        fputs(write_buffer, ptr_write);
+        digits_to_letters(r_buffer, LENGHT);
+        fputs(r_buffer, ptr_write);
         fprintf(ptr_write, "\n");
     }
     fclose(ptr_open);
