@@ -25,7 +25,7 @@
 // }
 
     int letter_symbol(int symbol){
-        if (isalpha(symbol) || (ispunct)(symbol)
+        if ((isalpha(symbol)) || ((ispunct(symbol))))
         {
             return 1;
         }
@@ -37,45 +37,95 @@
 
 void digits_to_letters(char buffer[], int lenght1, char buffer1[])
 {
-    char last_char = 32;
+    char last_char;
     char symbol;
     int i = 0;
     char space = 32;
     int k = 0;
-    
-
-
+    buffer1 = buffer;
+   
+for (i = 0; i <= lenght1; i++){
+            printf("%c",buffer[i]);
+      }
 
     for (i = 0; i <= lenght1; i++)
     {
+        for (i = 0; i <= lenght1; i++){
+            printf("%c",buffer[i]);
+      }
         symbol = buffer[i];
-
-
-
-        if (isspace(buffer[i]))
+        
+        if(isalpha(symbol))
         {
-            last_char = NULL
-            continue
+
+           last_char = buffer[i];     
+
+            printf("%c",buffer1[i]);
+
+           for (k = 0; k <= lenght1; k++)
+           {
+               if(letter_symbol(buffer[k]))
+                {
+                    continue;
+                }
+                if(isdigit(buffer[k]))
+                {
+                    buffer1[k] = last_char;
+                }
+           }
+
         }
-
-        if (isalpha(buffer[i]))
+        else if(isspace(buffer[i]))
         {
-            last_char = symbol;
-            buffer1[i] = last_char;
-        }
-        else if (isdigit(buffer[i]))
-        {
-            symbol = last_char;
-            buffer1[i] = symbol;
+        last_char=NULL;
         }
     }
-for (i = 0; i <= lenght1; i++){
-            printf("%c",buffer1[i]);
-      }
+        
+}   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+//         if (isspace(buffer[i]))
+//         {
+//             last_char = NULL
+//             continue
+//         }
+
+//         if (letter_symbol(buffer[i]))
+//         {
+//             last_char = symbol;
+//             buffer1[i] = last_char;
+//         }
+//         else if (isdigit(buffer[i]))
+//         {
+//             symbol = last_char;
+//             buffer1[i] = symbol;
+//         }
+//     }
+// for (i = 0; i <= lenght1; i++){
+//             printf("%c",buffer1[i]);
+//       }
     
 
 
-}
+// }
 
 
 int main(int argc, char *argv[])
