@@ -4,6 +4,22 @@
 #include <ctype.h>
 #define LENGHT 256
 
+
+
+// int is_space (int symbol)
+// {
+//     if (symbol == space)
+//     {
+//         return 1;
+//     }
+//     return 0;
+// }
+
+
+
+
+
+
 int is_number(int symbol)
 {
     if (symbol >= '0' && symbol <= '9')
@@ -24,15 +40,6 @@ int is_letter(int symbol)
     return 0;
 }
 
-    // int letter_symbol(int symbol){
-    //     if ((isalpha(symbol)) || ((ispunct(symbol))))
-    //     {
-    //         return 1;
-    //     }
-
-    //     return 0;
-    // }
-
 
 
 void digits_to_letters(char buffer[], int lenght1)
@@ -42,18 +49,19 @@ void digits_to_letters(char buffer[], int lenght1)
     int i = 0;
     char space = 32;
     int k = 0;
-    
+    int j=0;
+   
 
    for(i=0; i<= lenght1; i++)
    {
+       
        symbol = buffer[i];
     //    buffer1[i]= buffer[i];
        if(is_letter(symbol))
        {
-           
-       last_char = symbol;
+            last_char = symbol;
        
-            printf("%c",last_char);
+            //printf("%c",last_char);
         
         for (k=0; k <= lenght1; k++)
         {
@@ -62,14 +70,23 @@ void digits_to_letters(char buffer[], int lenght1)
             if(is_number(symbol))
             {
                 buffer[k] = last_char;
-
+            }
+            if(symbol == space)
+            {
+                buffer[k] = space;
+                break;
             }
         }
-       }
+        }
+    }
 
+    for(i=0; i<= lenght1; i++)
+   {
+       printf("%c",buffer[i]);
    }
-
 }
+
+
     
 
 
