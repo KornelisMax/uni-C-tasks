@@ -65,26 +65,26 @@ void create_list(int n)
 
 void reverse_list()
 {
-    struct element *prevNode, *curNode;
+    struct element *previous_element, *current_element;
 
     if(head != NULL)
     {
-        prevNode = head;
-        curNode = head->next;
+        previous_element = head;
+        current_element = head->next;
         head = head->next;
 
-        prevNode->next = NULL;
+        previous_element->next = NULL;
 
         while(head != NULL)
         {
             head = head->next;
-            curNode->next = prevNode;
+            current_element->next = previous_element;
 
-            prevNode = curNode;
-            curNode = head;
+            previous_element = current_element;
+            current_element = head;
         }
 
-        head = prevNode; 
+        head = previous_element; 
     }
 }
 
@@ -102,7 +102,7 @@ void display()
         temp = head;
         while(temp != NULL)
         {
-            printf("data = %d\n", temp->data); 
+            printf("data: %d\n", temp->data); 
             temp = temp->next;                 
         }
     }
