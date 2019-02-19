@@ -6,7 +6,7 @@ struct node
         unsigned int data;
         struct node *previous;
         struct node *next;
-    }*head, *tail;
+    };
 
 // void CREATE_EMPTY_DEQUE()
 // {

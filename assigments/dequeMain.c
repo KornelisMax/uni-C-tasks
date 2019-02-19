@@ -1,58 +1,122 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "dequeimplementation.c"
-#include "header.h"
+#include <stdio.h> 
+#include <stdlib.h> 
+  
+// A linked list node 
+struct Node 
+{ 
+  int data; 
+  struct Node *next;
+  struct Node *previous; 
+}; 
+  
+/* inserts a new node on the front of the list. */
+void push(struct Node** head_ref, int new_data) 
+{ 
+    /* allocate node */
+    struct Node* new_node = (struct Node*) malloc(sizeof(struct Node)); 
+  
+    /* put in the data  */
+    new_node->data  = new_data; 
+  
+    new_node->previous = NULL;
+    /* make next of new node as head */
+    new_node->next = (*head_ref); 
+  
+    /* move the head to point to the new node */
+    (*head_ref)    = new_node; 
+} 
+  
+/* adds a new node at the end  */
+void append(struct Node** head_ref, int new_data) 
+{ 
+    /* allocate node */
+    struct Node* new_node = (struct Node*) malloc(sizeof(struct Node)); 
+    struct Node *tail = *head_ref;  /* used to*/
+  
+    /* put in the data  */
+    new_node->data  = new_data; 
+  
+    /* new node is going to be the last node, so make next of 
+          it as NULL*/
+    new_node->next = NULL; 
 
-void CREATE_EMPTY_DEQUE()
+    /* previous node points to nothing */
+    new_node->previous = *(head_ref);
+
+    /* if the list is empty, then make the new node as head */
+    if (*head_ref == NULL) 
+    { 
+       *head_ref = new_node; 
+       return; 
+    } 
+
+    /* traverse till the last node */
+    while (tail->next != NULL)     
+        tail = tail->next; 
+    /* change the next of last node */
+    tail->next = new_node; 
+    new_node->previous = tail;
+    return; 
+} 
+
+void DELETE_FRONT(struct Node **head_ref) //front
 {
-        head = (struct node *)malloc(sizeof(struct node));
-        if (head == NULL)
-        {
-            printf("can't allocate memory");
-        }
+    struct Node *current = *head_ref;
+      while (current != NULL) 
+        { 
+            *head_ref = current->next;    
+            free(current);             
+            return;
+        }   
+       
+    }
 
-        tail = (struct node *)malloc(sizeof(struct node));
-        if (tail == NULL)
-        {
-            printf("can't allocate memory");
-        }
+void delete_all(struct Node **head_ref)
+{
+     struct Node *current = *head_ref;
+     struct Node *next; 
+     while (current != NULL)  
+        { 
+            next = current->next; 
+            free(current); 
+            current->previous = NULL;
+            current = next; 
+        } 
+    
+   /* might work wrong this one */
+    *head_ref = NULL; 
+        } 
         
-        // free(head);
-        // free(tail);
-        // *head = NULL;
-        // *tail = NULL;
-    }
 
 
-void CHECK_IF_EMPTY(struct node **head_ref)
-{
-        if (*head_ref == NULL)
-        {
-            printf("Deque is empty");
-        }
-        else
-        {
-            printf("Deque isn't empty");
-        }
-    }
+void printList(struct Node *node) 
+{ 
+  while (node != NULL) 
+  { 
+     printf(" %d ", node->data); 
+     node = node->next; 
+     
+  } 
+    } 
+  
+int main() 
+{ 
+  struct Node* tail = NULL;
+  struct Node* head = NULL; 
+  
+  printf("deleted \n");
+  push(&head, 7); 
+  push(&head, 1); 
+  append(&head, 4); 
+  DELETE_FRONT(&head);
+  push(&head, 1);
+  delete_all(&head);
+  push(&head, 1);
 
-
-int main()
-{
-
-    CREATE_EMPTY_DEQUE();
-    struct Node* head = NULL; 
-    struct Node* tail = NULL;
-    CHECK_IF_EMPTY(&head);
-    return 0;
-}
-
-
-/*  create empty Deque
-    check whether its empty or full */
-    
-    
-    
-    
-
-    
+  
+  
+  printf("\n list is: "); 
+  printList(head); 
+  
+  return 0; 
+} 
