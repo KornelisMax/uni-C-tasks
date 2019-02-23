@@ -31,7 +31,7 @@ void append(struct Node** head_ref, int new_data)
 { 
     /* allocate node */
     struct Node* new_node = (struct Node*) malloc(sizeof(struct Node)); 
-    struct Node *tail = *head_ref;  /* used to*/
+    struct Node *tail = *head_ref;  /* used to get last element*/
   
     /* put in the data  */
     new_node->data  = new_data; 
@@ -62,7 +62,13 @@ void append(struct Node** head_ref, int new_data)
 void DELETE_FRONT(struct Node **head_ref) //front
 {
     struct Node *current = *head_ref;
-      while (current != NULL) 
+
+    if(current == NULL)
+    {
+        printf("list is already empty");
+    }
+
+    while (current != NULL) //is necessery
         { 
             *head_ref = current->next;    
             free(current);             
@@ -71,10 +77,54 @@ void DELETE_FRONT(struct Node **head_ref) //front
        
     }
 
-void delete_all(struct Node **head_ref)
+
+void DELETE_REAR(struct Node **head_ref) //works
+{
+    struct Node *current = *head_ref;
+    struct Node *last = *head_ref;
+    struct Node *check = *head_ref;
+   
+    
+    if(*head_ref == NULL)
+    {
+        printf("already empty list");
+        return;
+    }
+    // printf("already empty list");
+        while(current ->next !=NULL)
+        {
+            last = current;
+            current = current ->next;
+            current ->previous = check;
+        }
+    
+        
+        if(current == *head_ref)
+        {
+            *head_ref = NULL;
+            free(current);
+            return;
+        }
+        last ->next = NULL;
+        free(current);
+        
+        }
+
+
+
+    
+
+void DELETE_ALL(struct Node **head_ref)
 {
      struct Node *current = *head_ref;
      struct Node *next; 
+
+    if(current == NULL)
+    {
+        printf("already empty list");
+    }
+
+
      while (current != NULL)  
         { 
             next = current->next; 
@@ -83,7 +133,7 @@ void delete_all(struct Node **head_ref)
             current = next; 
         } 
     
-   /* might work wrong this one */
+   
     *head_ref = NULL; 
         } 
         
@@ -104,14 +154,18 @@ int main()
   struct Node* tail = NULL;
   struct Node* head = NULL; 
   
-  printf("deleted \n");
   push(&head, 7); 
-  push(&head, 1); 
-  append(&head, 4); 
-  DELETE_FRONT(&head);
+  //push(&head, 1); 
+//   append(&head, 4); 
+  append(&head, 5);
+//   DELETE_FRONT(&head);
+  DELETE_REAR(&head);
+  DELETE_REAR(&head);
+
   push(&head, 1);
-  delete_all(&head);
-  push(&head, 1);
+//   DELETE_ALL(&head);
+//   DELETE_ALL(&head);
+//   push(&head, 1);
 
   
   
