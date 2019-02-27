@@ -7,16 +7,24 @@
 int main() 
 { 
       int n;
-//   addfront(&head, 1); 
-  addRear(&head, 4); 
-// scanf("%d", &n);
-  addRear(&head, 2);
-//   delfront(&head);
-//   delrear(&head);
-  delAll(&head);
+  // *returnHead();
+  // initializeDeque();
+  isDequeFull();
+  isDequeEmpty(&head);
+  // int i = addFront(&head, 2); 
+// printf("%d s",  i);
+  // addRear(&head, 4); 
+  // scanf("%d", &n);
+  // addRear(&head, 2);
+    // delFront(&head);
+    // delFront(&head);
+    // delFront(&head);
+    // delRear(&head);
+    // delRear(&head);
+  // // delAll(&head);
   // delAll(&head);
-//   addfront(&head, 5);
-  printf("\n list is: "); 
+  //   addfront(&head, 5);
+  // printf("\n list is: "); 
   printDeque(head); 
   return 0; 
 } 
