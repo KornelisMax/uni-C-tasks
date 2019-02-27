@@ -33,9 +33,10 @@ int isDequeEmpty(struct Node **head_ref)
     if(isInitialized == 0) return 1;
     if(*head_ref == NULL)           //checking if there is no node
     {
-        printf("empty deque");
+        printf("empty deque\n");
         return 0;
     }
+    printf("not empty deque\n");
     return 0;
 }
 
@@ -45,10 +46,10 @@ int isDequeFull()
     struct Node* new_node = (struct Node*) malloc(sizeof(struct Node));
     if(new_node == NULL)
             {
-                printf("deque is full");
+                printf("deque is full\n");
                 return 0;
             }
-    printf("deque is not full");        
+    printf("deque is not full\n");        
     free(new_node);
     return 0;
 }
@@ -142,15 +143,30 @@ int delAll(struct Node **head_ref) //deletes everything (starting at beggining)
         current = next; 
     } 
     *head_ref = NULL;               //if there's everything already deleted we point head to NULL
+    isInitialized = 0;
+    printf("Deque is destroyed \n");
+    return 0;
         } 
 
-int printDeque(struct Node *node) //function to print deque elements (to check correctness)
+int printDeque() //function to print deque elements (to check correctness)
 { 
+
     if(isInitialized == 0) return 1;
-    while (node != NULL) 
-    { 
-        printf(" %d ", node->data); 
-        node = node->next; 
-    } 
-    return 0;
+    // printf("\n not init: "); 
+    // while (node != NULL) 
+    // { 
+    //     printf(" %d ", node->data); 
+    //     node = node->next; 
+    // } 
+    // return 0;
+
+
+struct Node *temp;
+        temp = head;
+        while(temp != NULL)
+        {
+            printf("%d\n", temp->data); 
+            temp = temp->next;                 
+        }
+
     } 

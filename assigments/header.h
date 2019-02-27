@@ -10,6 +10,7 @@ int delAll();
 int isDequeFull();
 int isDequeEmpty();
 int printdeque();
+void initializeDeque();
 
 
 #endif
