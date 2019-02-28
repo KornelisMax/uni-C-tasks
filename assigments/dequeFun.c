@@ -56,13 +56,15 @@ int isDequeFull()
 
 int addFront(struct Node** head_ref, int new_data) // adds a new node at the beggining 
 {  
+printf("\n Add to front \n");
+
     if(isInitialized == 0) return 1;
     struct Node* new_node = (struct Node*) malloc(sizeof(struct Node)); /* allocate node */
 
     new_node->data = new_data; /* put in the data  */
     new_node->previous = NULL; 
-    new_node->next = (*head_ref);  /* make next of new node as head */
-    (*head_ref) = new_node;  /* make next of new node as head */
+    new_node->next = *head_ref;  /* make next of new node as head */
+    *head_ref = new_node;  /* make next of new node as head */
 
     return 0;
     } 
@@ -148,8 +150,11 @@ int delAll(struct Node **head_ref) //deletes everything (starting at beggining)
     return 0;
         } 
 
-int printDeque() //function to print deque elements (to check correctness)
+int printDeque(struct Node** head_ref) //function to print deque elements (to check correctness)
 { 
+    printf("\n Print Deque \n");
+    printf("%p", *head_ref);
+    printf("\n");
 
     if(isInitialized == 0) return 1;
     // printf("\n not init: "); 
@@ -161,8 +166,8 @@ int printDeque() //function to print deque elements (to check correctness)
     // return 0;
 
 
-struct Node *temp;
-        temp = head;
+    struct Node *temp;
+        temp = *head_ref;
         while(temp != NULL)
         {
             printf("%d\n", temp->data); 
